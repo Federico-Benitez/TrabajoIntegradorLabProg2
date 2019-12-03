@@ -31,7 +31,7 @@ public class App extends javax.swing.JFrame {
     } 
     
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jFrame1 = new javax.swing.JFrame();
@@ -209,9 +209,9 @@ public class App extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>                        
+    }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonAgregarMouseClicked(java.awt.event.MouseEvent evt) {                                            
+    private void jButtonAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAgregarMouseClicked
 
         String titulo = textoTitulo.getText();
         String cont = textoContenido.getText();
@@ -228,7 +228,7 @@ public class App extends javax.swing.JFrame {
         
         //actualizar la lista que contiene los recordatorios en la ventana
         actualizarLista();
-    }                                           
+    }//GEN-LAST:event_jButtonAgregarMouseClicked
     
     private Color parsearColor (String elemento) {
         
@@ -274,7 +274,7 @@ public class App extends javax.swing.JFrame {
     }
     
     
-    private void jButtonModificarMouseClicked(java.awt.event.MouseEvent evt) {                                              
+    private void jButtonModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonModificarMouseClicked
         
         if (listaRecordatorios.getSelectedValue() == null) {
             JOptionPane.showMessageDialog(null, "No se selecciono ningun recordatorio");
@@ -290,7 +290,7 @@ public class App extends javax.swing.JFrame {
         VentanaInteriorModificar mod = new VentanaInteriorModificar(titulo, contenido, color, fuente);
         mod.setVisible(true);
         this.setEnabled(false); //se desactiva la ventana principal, hasta que se termine de modificar
-    }                                             
+    }//GEN-LAST:event_jButtonModificarMouseClicked
     
     private int buscarRecordatorio(String titulo){
         for (int i = 0; i < contenedorRecordatorios.getListaRecordatorios().size(); i++) {
@@ -322,7 +322,7 @@ public class App extends javax.swing.JFrame {
         return -1;
     }
     
-    private void jButtonEliminarMouseClicked(java.awt.event.MouseEvent evt) {                                             
+    private void jButtonEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEliminarMouseClicked
         
         if (contenedorRecordatorios.getListaRecordatorios().size() == 1) {
             modeloLista.clear();
@@ -332,15 +332,15 @@ public class App extends javax.swing.JFrame {
         String titulo = listaRecordatorios.getSelectedValue();
         contenedorRecordatorios.eliminarRecordatorio(titulo);
         actualizarLista();
-    }                                            
+    }//GEN-LAST:event_jButtonEliminarMouseClicked
     
-    private void jButtonEliminarTodoActionPerformed(java.awt.event.ActionEvent evt) {                                                    
+    private void jButtonEliminarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarTodoActionPerformed
         
         contenedorRecordatorios.getListaRecordatorios().clear();
         modeloLista.clear();
-    }                                                   
+    }//GEN-LAST:event_jButtonEliminarTodoActionPerformed
 
-    private void jButtonAbrirActionPerformed(java.awt.event.ActionEvent evt) {                                             
+    private void jButtonAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirActionPerformed
        
         if (listaRecordatorios.getSelectedValue() == null) {
             JOptionPane.showMessageDialog(null, "No se selecciono ningun recordatorio");
@@ -357,7 +357,7 @@ public class App extends javax.swing.JFrame {
         VentanaAbrir abrir = new VentanaAbrir(titulo,cont,color,fuente);
         abrir.setVisible(true);
 
-    }                                            
+    }//GEN-LAST:event_jButtonAbrirActionPerformed
     
     public JComboBox getComboBoxColor() {
         return boxColores;
@@ -412,7 +412,7 @@ public class App extends javax.swing.JFrame {
    private ContenedorRecordatorios contenedorRecordatorios = new ContenedorRecordatorios();
     
     //Variables declaradas por el generador de codigo.
-    // Variables declaration - do not modify                     
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxColores;
     private javax.swing.JComboBox<String> boxFuentes;
     private javax.swing.JButton jButtonAbrir;
@@ -432,8 +432,10 @@ public class App extends javax.swing.JFrame {
     public javax.swing.JList<String> listaRecordatorios;
     private javax.swing.JTextArea textoContenido;
     private javax.swing.JTextField textoTitulo;
-    // End of variables declaration  
-   
+    // End of variables declaration//GEN-END:variables
+
+
+
   class VentanaInteriorModificar extends javax.swing.JFrame {
       
     private String tituloOriginal,contenidoOriginal,contenidoNuevo,tituloNuevo,colorOriginal,fuenteOriginal;
@@ -442,17 +444,13 @@ public class App extends javax.swing.JFrame {
     private ContenedorRecordatorios contenedorModificar;
     
     public VentanaInteriorModificar(String titulo, String contenido, int color, int fuente) {
-        
-        Toolkit sistema = Toolkit.getDefaultToolkit(); // nos proporciona un kit de herramientas gráficas
-	Image icono = sistema.getImage("birome.jpg");
-	setIconImage(icono);
-        this.addWindowListener(new AdaptadorModificar());
         this.tituloOriginal=titulo;
         this.contenidoOriginal=contenido;
         initComponents();
         this.jComboBox1.setSelectedIndex(color);
         this.jComboBox2.setSelectedIndex(fuente);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.addWindowListener(new AdaptadorModificar());
     }
     
     @SuppressWarnings("unchecked")
@@ -621,5 +619,34 @@ public class App extends javax.swing.JFrame {
                 App.this.setEnabled(true);                
             }
     }
-  }  
+    
+  }
+
+  class AdaptadorVentana extends WindowAdapter {
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+                //se leen los recordatorios guardados en el disco
+		contenedorRecordatorios.leerRecordatorios();
+		actualizarLista();
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		//se guardan los recordatorios antes de cerrar la ventana
+		contenedorRecordatorios.guardarRecordatorios();
+	}	  
+	  
+  }
+
+  class AdaptadorMouse extends MouseAdapter {
+
+      @Override
+      public void mouseClicked(MouseEvent e) {
+       
+          
+      }
+  }
+
+
 }
