@@ -433,5 +433,193 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JTextArea textoContenido;
     private javax.swing.JTextField textoTitulo;
     // End of variables declaration  
-                 
+   
+  class VentanaInteriorModificar extends javax.swing.JFrame {
+      
+    private String tituloOriginal,contenidoOriginal,contenidoNuevo,tituloNuevo,colorOriginal,fuenteOriginal;
+    private Color colorNuevo;
+    private Font fuenteNueva;
+    private ContenedorRecordatorios contenedorModificar;
+    
+    public VentanaInteriorModificar(String titulo, String contenido, int color, int fuente) {
+        
+        Toolkit sistema = Toolkit.getDefaultToolkit(); // nos proporciona un kit de herramientas gráficas
+	Image icono = sistema.getImage("birome.jpg");
+	setIconImage(icono);
+        this.addWindowListener(new AdaptadorModificar());
+        this.tituloOriginal=titulo;
+        this.contenidoOriginal=contenido;
+        initComponents();
+        this.jComboBox1.setSelectedIndex(color);
+        this.jComboBox2.setSelectedIndex(fuente);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
+    
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        textoModTitulo = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        textoModCont = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        botonConfirmar = new JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Modificar");
+
+        jLabel1.setText("Titulo:");
+
+        jLabel2.setText("Contenido:");
+
+        textoModTitulo.setText(this.tituloOriginal);
+        textoModCont.setText(this.contenidoOriginal);
+        textoModCont.setColumns(20);
+        textoModCont.setRows(5);
+        jScrollPane1.setViewportView(textoModCont);
+
+        jLabel3.setText("Ingrese Modificaciones");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textoModTitulo)
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(153, 153, 153)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textoModTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        botonConfirmar.setText("Confirmar");
+        botonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonConfirmarActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Fuente");
+
+        jLabel5.setText("Color");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rojo ", "Azul", "Negro", "Blanco", "Verde" }));
+
+        String[] fuentes = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(fuentes));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(botonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(botonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        pack();
+    }// </editor-fold>                        
+
+    private void botonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {                                               
+         //confirmar modificacion
+        this.tituloNuevo = textoModTitulo.getText();
+        this.contenidoNuevo = textoModCont.getText(); 
+        
+        this.colorNuevo = parsearColor(jComboBox1.getSelectedItem().toString());
+        this.fuenteNueva = parsearFuente(jComboBox2.getSelectedItem().toString());
+        
+        contenedorRecordatorios.modificarRecordatorio(tituloOriginal, tituloNuevo, contenidoNuevo, colorNuevo, fuenteNueva);
+        actualizarLista();
+        setVisible(false);
+        App.this.setEnabled(true);
+        dispose();
+    }                                              
+
+    public String getTituloNuevo(){
+        return this.tituloNuevo;
+    }
+    
+    public String getContNuevo() {
+        return this.contenidoNuevo;
+    }
+    
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton botonConfirmar;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea textoModCont;
+    private javax.swing.JTextField textoModTitulo;
+    
+    class AdaptadorModificar extends WindowAdapter {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                App.this.setEnabled(true);                
+            }
+    }
+  }  
 }
